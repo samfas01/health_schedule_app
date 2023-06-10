@@ -62,7 +62,7 @@
                             <label for="matric_no font-weight-bold" class="col-md-4 col-form-label text-md-end font-weight-bold">{{ __('Date') }}</label>
 
                             <div class="col-md-6">
-                                {{\Carbon\Carbon::parse(Auth::user()->schedule_date)->toDateString()}}
+                                {{ \Carbon\Carbon::parse($schedule->schedule_time)->format('F j, Y'); }}
                             </div>
                         </div>
 
@@ -71,7 +71,7 @@
                             <label for="matric_no" class="col-md-4 col-form-label text-md-end font-weight-bold">{{ __('Time') }}</label>
 
                             <div class="col-md-6">
-                                {{\Carbon\Carbon::parse(Auth::user()->schedule_date)->format('g:i a')}}
+                                {{ \Carbon\Carbon::parse($schedule->schedule_time)->format('h:i A'); }}
                             </div>
                         </div>
 
@@ -93,16 +93,6 @@
                                 {{"School Clinic"}}
                             </div>
                         </div>
-
-                        
-
-
-
-                        
-
-                       
-
-                      
                     </form>
                 </div>
             </div>

@@ -476,7 +476,10 @@ h6 {
   background-size: cover;
   margin-bottom: -200px;
 }
-
+.body-bg{
+  background: url("../img/hero-bg.jpg") top center;
+  background-size: cover;
+}
 #hero .container {
   position: relative;
 }

@@ -99,14 +99,6 @@ class HomeController extends Controller
 
         $data = [
 
-            'title' => 'Welcome to ItSolutionStuff.com',
-
-            'date' => date('m/d/Y')
-
-        ];
-
-        $data = [
-
             'name' => Auth::user()->name,
 
             'date' => date('m/d/Y')

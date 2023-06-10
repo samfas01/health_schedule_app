@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -10,13 +12,24 @@ use PDF;
 
 class AdminController extends Controller
 {
-    //
-    
     public function index()
     {
-        $users = User::all();
+        $users = User::where('user_type', '<>', 2)->with(['schedules' => function ($query) {
+            $query->where([['is_canceled', false], ['is_fulfilled', false], ['schedule_time', '>', Carbon::now()]]);
+        }])->get();
         // $users = DB::table('users')->distinct()->select('schedule_date', "email")->get();
         return view('admin.User', compact('users'));
+    }
+    public function activeSchedules()
+    {
+        $users = User::whereHas('schedules', function (Builder $query) {
+            $query->where([['is_canceled', false], ['is_fulfilled', false], ['schedule_time', '>', Carbon::now()]]);
+        })->with(['schedules' => function ($query) {
+            $query->where([['is_canceled', false], ['is_fulfilled', false], ['schedule_time', '>', Carbon::now()]]);
+        }])->get();
+        // $users = DB::table('users')->distinct()->select('schedule_date', "email")->get();
+        return view('admin.active-schedules', compact('users'));
+        dd($users);
     }
 
     public function showDetails()

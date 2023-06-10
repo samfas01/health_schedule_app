@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,12 +32,22 @@ Route::get('contact', [App\Http\Controllers\HomeController::class, 'contact'])->
 Route::post('contact', [App\Http\Controllers\HomeController::class, 'saveContact'])->name("saveContact");
 
 
+Route::name('student.')->group(function () {
+    Route::get('/home', [App\Http\Controllers\StudentController::class, 'home'])->name('home');
+    Route::get('schedule/{id}', [App\Http\Controllers\StudentController::class, 'viewSchedule'])->name("viewSchedule");
+    Route::get('generate-pdf/{id}', [App\Http\Controllers\StudentController::class, 'generateSchedulePdf'])->name("generateSchedulePdf");
+    Route::get('/schedules', [App\Http\Controllers\StudentController::class, 'schedules'])->name('schedules');
+    Route::post('/schedules', [App\Http\Controllers\StudentController::class, 'createSchedule'])->name('schedules');
+    Route::patch('/schedules/{id}', [App\Http\Controllers\StudentController::class, 'cancelSchedule'])->name('schedules.cancel');
+    Route::patch('/schedules/{id}/reschedule', [App\Http\Controllers\StudentController::class, 'reSchedule'])->name('schedules.reschedule');
+});
 
 // makereshdedule
 Route::group(['prefix' => 'admin', 'middleware' => "isAdmin"], function () {
 
     Route::get('reschedule', [App\Http\Controllers\AdminController::class, 'reschedule'])->name("postreschedule");
-    Route::get('user', [App\Http\Controllers\AdminController::class, 'index'])->name("personalProfile");
-    Route::get('users', [App\Http\Controllers\AdminController::class, 'showDetails']);
+    Route::get('schedules', [App\Http\Controllers\AdminController::class, 'activeSchedules'])->name("admin.schedules");
+    Route::get('users', [App\Http\Controllers\AdminController::class, 'index'])->name("personalProfile");
+    Route::get('user', [App\Http\Controllers\AdminController::class, 'showDetails'])->name('admin.home');
     Route::get('date/{users:schedule_date}', [App\Http\Controllers\AdminController::class, 'printStudentDate']);
 });

@@ -26,7 +26,6 @@ class User extends Authenticatable
         "phone",
         "faculty",
         "photo",
-
         "level",
         "compelete_profile",
         "schedule_date",
@@ -53,4 +52,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    /**
+     * Get the comments for the blog post.
+     */
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class);
+    }
 }

@@ -93,8 +93,6 @@ class RegisterController extends Controller
             "department" => $data['department'],
             "matric_no" => $data['matric_no'],
             'password' => Hash::make($data['password'])
-
-
         ]);
     }
 }
