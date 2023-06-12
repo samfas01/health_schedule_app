@@ -39,7 +39,7 @@ class AdminController extends Controller
      */
     public function viewSchedule($id)
     {
-        $schedule = Schedule::where('id',$id)->with('user')->first();
+        $schedule = Schedule::where('id', $id)->with('user')->first();
         if (!$schedule) {
             return back()->with(['error_message' => 'Invalid Schedule!']);
         }
@@ -50,7 +50,7 @@ class AdminController extends Controller
     public function generateSchedulePdf($id)
 
     {
-        $schedule = Schedule::where('id',$id)->with('user')->first();
+        $schedule = Schedule::where('id', $id)->with('user')->first();
         if (!$schedule) {
             return back()->with(['error_message' => 'Invalid Schedule!']);
         }
@@ -69,7 +69,21 @@ class AdminController extends Controller
     }
     public function showDetails()
     {
+        $today = Carbon::today();
+        $monday = $today->startOfWeek();
+        $tuesday = $monday->copy()->addDays(1);
+        $wednesday = $monday->copy()->addDays(2);
+        $thursday = $monday->copy()->addDays(3);
+        $friday = $monday->copy()->addDays(4);
+        $saturday = $monday->copy()->addDays(5);
+        $schedules = Schedule::where([['is_canceled', false], ['schedule_time', '>', $monday], ['schedule_time', '<', $saturday]])->with('user')->get();
+        $mondaySchedules = $schedules->where('schedule_time', '>', $monday)->where('schedule_time', '<', $tuesday);
+        $tuesdaySchedules = $schedules->where('schedule_time', '>', $tuesday)->where('schedule_time', '<', $wednesday);
+        $wednesdaySchedules = $schedules->where('schedule_time', '>', $wednesday)->where('schedule_time', '<', $thursday);
+        $thursdaySchedules = $schedules->where('schedule_time', '>', $thursday)->where('schedule_time', '<', $friday);
+        $fridaySchedules = $schedules->where('schedule_time', '>', $friday)->where('schedule_time', '<', $saturday);
 
+        // dd($fridaySchedules);
         $_16 = DB::table('users')->where("schedule_date", '=', 16)->get();
         $_17 = DB::table('users')->where("schedule_date", '=', 17)->get();
         $_18 = DB::table('users')->where("schedule_date", '=', 18)->get();
@@ -81,9 +95,7 @@ class AdminController extends Controller
         $_26 = DB::table('users')->where("schedule_date", '=', 26)->get();
         $_27 = DB::table('users')->where("schedule_date", '=', 27)->get();
 
-
-
-        return view('admin.DateOfStudent', compact('_17', '_18', '_19', '_20', '_23', '_24', '_25', '_26', '_27'));
+        return view('admin.DateOfStudent', compact('_17', '_18', '_19', '_20', '_23', '_24', '_25', '_26', '_27', 'schedules', 'mondaySchedules', 'tuesdaySchedules', 'wednesdaySchedules', 'thursdaySchedules', 'fridaySchedules'));
     }
 
 
