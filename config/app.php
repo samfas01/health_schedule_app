@@ -174,9 +174,13 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        
         Barryvdh\DomPDF\ServiceProvider::class,
-
+        
+        /*
+         * Application Service Providers...
+         */
+        App\Providers\ViewServiceProvider::class,
     ],
 
     /*

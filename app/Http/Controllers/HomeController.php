@@ -92,34 +92,6 @@ class HomeController extends Controller
         return view('student');
     }
 
-
-    public function generatePDF()
-
-    {
-
-        $data = [
-
-            'name' => Auth::user()->name,
-
-            'date' => date('m/d/Y')
-
-        ];
-        // pdfview.blade.php
-        $pdf = PDF::loadView('pdfview', $data);
-        return $pdf->stream('doc.pdf');
-
-
-        // $pdf = PDF::loadView('student');
-
-
-
-        // return $pdf->download('itsolutionstuff.pdf');
-    }
-
-
-
-
-
     public function reschedule()
     {
         return view('admin.reschedule');

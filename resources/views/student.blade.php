@@ -8,7 +8,7 @@
 
 
 
-            <div class="col-md-8 offset-md-3">
+            {{-- <div class="col-md-8 offset-md-3">
                 @if (session('status'))
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}
@@ -87,7 +87,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
     </div>

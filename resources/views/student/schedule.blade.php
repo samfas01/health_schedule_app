@@ -68,7 +68,7 @@
             </div>
             <div class="row justify-content-around">
                 {{-- <a class="btn btn-primary col-sm-3 mt-1" href="{{ route('student.schedules') }}">Re-schedule</a> --}}
-                <button class="btn btn-primary col-sm-3 mt-1" data-bs-toggle="modal" data-bs-target="#scheduleModal">
+                <button class="btn btn-primary col-sm-3 mt-1" data-bs-toggle="modal" data-bs-target="#rescheduleModal">
                     Re-schedule
                 </button>
                 @if ($schedule->is_canceled)
@@ -84,7 +84,7 @@
 
 
     </div>
-    <div class="modal fade" id="scheduleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="rescheduleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="scheduleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">

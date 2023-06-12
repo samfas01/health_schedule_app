@@ -27,8 +27,7 @@ class StudentController extends Controller
     {
         $user =     auth()->user();
         $schedules = $user->schedules;
-        $activeSchedule = $schedules->where('is_fulfilled', false)->where('is_canceled', false);
-        // dd($activeSchedule);
+        $activeSchedule = $user->schedules()->where([['is_canceled', false], ['is_fulfilled', false], ['schedule_time', '>', Carbon::now()]])->get();
         $nextMinSchedule = Carbon::today()->addWeekday()->addHours(8);
         // $nextMaxSchedule = $nextMinSchedule->addWeekdays(7);
         // dd($nextMinSchedule);
@@ -42,7 +41,6 @@ class StudentController extends Controller
      */
     public function schedules()
     {
-        return redirect()->route('student.home');
         $user =     auth()->user();
         $schedules = $user->schedules;
         $activeSchedule = $schedules->where('is_fulfilled', false)->where('is_canceled', false);
@@ -139,7 +137,7 @@ class StudentController extends Controller
     {
         $user = auth()->user();
 
-        $schedule = $user->schedules()->where([['is_canceled', false],['id', $id], ['is_fulfilled', false], ['schedule_time', '>', Carbon::now()]])->first();
+        $schedule = $user->schedules()->where([['is_canceled', false], ['id', $id], ['is_fulfilled', false], ['schedule_time', '>', Carbon::now()]])->first();
         if (!$schedule) {
             return redirect()->back()->with(['error_message' => 'Invalid Schedule!']);
             dd('$activeSchedules->isEmpty()');
@@ -148,6 +146,7 @@ class StudentController extends Controller
         $data = [
 
             'schedule' => $schedule,
+            'user' => $user,
 
         ];
         // pdfview.blade.php

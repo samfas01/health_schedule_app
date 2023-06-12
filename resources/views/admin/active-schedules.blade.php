@@ -28,18 +28,18 @@
                                     <tbody>
                                         @foreach ($users as $user)
                                             <tr>
-                                                <td>{{ $user->id }}</td>
+                                                <td>{{ $loop->index + 1 }}</td>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->department }}</td>
                                                 <td>{{ $user->schedules->isEmpty() ? 'no schedue' : \Carbon\Carbon::parse($user->schedules[0]->schedule_time)->toDayDateTimeString() . '(' . \Carbon\Carbon::parse($user->schedules[0]->schedule_time)->diffForHumans() . ')' }}
                                                 </td>
                                                 <td>
                                                     @if (!$user->schedules->isEmpty())
-                                                        <button class="btn btn-info btn-sm" type="button"
+                                                        <a class="btn btn-info btn-sm" href="{{route('admin.single_schedule',$user->schedules[0]->id)}}"
                                                             style="color:white">
                                                             <i class="fa fa-eye"></i>
                                                             {{ __('view') }}
-                                                        </button>
+                                                        </a>
                                                     @else
                                                         <button class="btn btn-info btn-sm" type="button" disabled
                                                             style="color:white">

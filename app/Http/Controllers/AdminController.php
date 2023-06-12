@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Schedule;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -31,7 +32,41 @@ class AdminController extends Controller
         return view('admin.active-schedules', compact('users'));
         dd($users);
     }
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function viewSchedule($id)
+    {
+        $schedule = Schedule::where('id',$id)->with('user')->first();
+        if (!$schedule) {
+            return back()->with(['error_message' => 'Invalid Schedule!']);
+        }
+        // dd($schedule);
+        $user =     $schedule->user;
+        return view('admin.view-schedule', compact('schedule', 'user'));
+    }
+    public function generateSchedulePdf($id)
 
+    {
+        $schedule = Schedule::where('id',$id)->with('user')->first();
+        if (!$schedule) {
+            return back()->with(['error_message' => 'Invalid Schedule!']);
+        }
+        // dd($schedule);
+        $user =     $schedule->user;
+
+        $data = [
+            'schedule' => $schedule,
+            'user' => $user,
+        ];
+        // pdfview.blade.php
+        $pdf = PDF::loadView('pdfview', $data);
+        return $pdf->stream('student-medical-appointment-slip.pdf');
+
+        // return $pdf->download('itsolutionstuff.pdf');
+    }
     public function showDetails()
     {
 
@@ -71,14 +106,4 @@ class AdminController extends Controller
             'Content-Disposition' =>  'inline; filename="invoice.pdf"',
         ]);
     }
-
-
-
-
-
-    // $pdf = PDF::loadView('student');
-
-
-
-    // return $pdf->download('itsolutionstuff.pdf');
 }

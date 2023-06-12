@@ -25,7 +25,6 @@ Route::get('/complete/profile', [App\Http\Controllers\HomeController::class, 'Co
 Route::post('/complete/profile', [App\Http\Controllers\HomeController::class, 'SubmitProfile'])->name('SubmitProfile');
 Route::get('/all', [App\Http\Controllers\HomeController::class, 'all'])->name('all');
 Route::get('/student', [App\Http\Controllers\HomeController::class, 'student'])->name('student');
-Route::get('generate-pdf', [App\Http\Controllers\HomeController::class, 'generatePDF'])->name("generatePDF");
 Route::get('reschedule', [App\Http\Controllers\HomeController::class, 'reschedule'])->name("reschedule");
 Route::post('makereshdedule', [App\Http\Controllers\HomeController::class, 'makereshdedule'])->name("makereshdedule");
 Route::get('contact', [App\Http\Controllers\HomeController::class, 'contact'])->name("contact");
@@ -43,11 +42,13 @@ Route::name('student.')->group(function () {
 });
 
 // makereshdedule
-Route::group(['prefix' => 'admin', 'middleware' => "isAdmin"], function () {
+Route::middleware(['auth','isAdmin'])->prefix('admin')->group(function () {
 
     Route::get('reschedule', [App\Http\Controllers\AdminController::class, 'reschedule'])->name("postreschedule");
     Route::get('schedules', [App\Http\Controllers\AdminController::class, 'activeSchedules'])->name("admin.schedules");
     Route::get('users', [App\Http\Controllers\AdminController::class, 'index'])->name("personalProfile");
     Route::get('user', [App\Http\Controllers\AdminController::class, 'showDetails'])->name('admin.home');
+    Route::get('schedules/{id}', [App\Http\Controllers\AdminController::class, 'viewSchedule'])->name('admin.single_schedule');
+    Route::get('print-schedule/{id}', [App\Http\Controllers\AdminController::class, 'generateSchedulePdf'])->name("admin.generateSchedulePdf");
     Route::get('date/{users:schedule_date}', [App\Http\Controllers\AdminController::class, 'printStudentDate']);
 });

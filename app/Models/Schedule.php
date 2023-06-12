@@ -16,4 +16,8 @@ class Schedule extends Model
     protected $fillable = [
         'schedule_time'
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
