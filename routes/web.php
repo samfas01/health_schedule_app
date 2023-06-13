@@ -51,4 +51,5 @@ Route::middleware(['auth','isAdmin'])->prefix('admin')->group(function () {
     Route::get('schedules/{id}', [App\Http\Controllers\AdminController::class, 'viewSchedule'])->name('admin.single_schedule');
     Route::get('print-schedule/{id}', [App\Http\Controllers\AdminController::class, 'generateSchedulePdf'])->name("admin.generateSchedulePdf");
     Route::get('date/{users:schedule_date}', [App\Http\Controllers\AdminController::class, 'printStudentDate']);
+    Route::get('schedules-print', [App\Http\Controllers\AdminController::class, 'schedulesPrint'])->name("admin.schedulesPrint");
 });

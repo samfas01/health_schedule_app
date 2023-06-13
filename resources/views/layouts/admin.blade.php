@@ -5,19 +5,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{asset('assetss/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assetss/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assetss/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assetss/css/all.min.css') }}">
     <!-- <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet" href="assets/css/nice-select.css">
     <link rel="stylesheet" href="assets/css/owl.min.css">
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/flaticon.css"> -->
-    <link rel="stylesheet" href="{{asset('assetss/css/jquery-ui.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assetss/css/jquery-ui.min.css') }}">
     <!-- <link rel="stylesheet" href="assets/css/main.css"> -->
-    <link rel="stylesheet" href="{{asset('assetss/css/adminlte.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assetss/css/adminlte.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assetss/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assetss/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assetss/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assetss/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assetss/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assetss/css/all.min.css') }}">
     <!-- <link rel="stylesheet" href="css/index.css"> -->
     <title>Admin Panel</title>
     <style>
@@ -32,7 +32,7 @@
         text-transform: uppercase;
         font-size: 20px;
         font-weight: 900;
-    }*/
+        }*/
 
         .dot {
             font-size: 44px;
@@ -140,17 +140,17 @@
                             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                                 data-accordion="false">
                                 <li class="nav-item menu-open mb-3 pb-3 user-panel">
-                                    <a class="nav-link" href="{{route("admin.home")}}">
+                                    <a class="nav-link" href="{{ route('admin.home') }}">
                                         <i class="nav-icon fas fa-user"></i>Dashboard
                                     </a>
                                 </li>
                                 <li class="nav-item menu-open mb-3 pb-3 user-panel">
-                                    <a class="nav-link" href="{{route("personalProfile")}}">
+                                    <a class="nav-link" href="{{ route('personalProfile') }}">
                                         <i class="nav-icon fas fa-user"></i>All Student
                                     </a>
                                 </li>
                                 <li class="nav-item menu-open mb-3 pb-3 user-panel">
-                                    <a class="nav-link" href="{{route("admin.schedules")}}">
+                                    <a class="nav-link" href="{{ route('admin.schedules') }}">
                                         <i class="nav-icon fas fa-folder"></i>Student Date
                                     </a>
                                 </li>
