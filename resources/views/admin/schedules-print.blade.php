@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ asset('assetss/css/bootstrap.min.css') }}">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
     {{-- <link rel="stylesheet" href="{{ asset('assetss/css/all.min.css') }}">
     <!-- <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet" href="assets/css/nice-select.css">
@@ -19,30 +20,7 @@
     <link rel="stylesheet" href="{{ asset('assetss/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assetss/css/all.min.css') }}"> --}}
     <title>Week Schedule</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* .navbar-brand h5 {
-        color: #1e1e1e;
-        text-transform: uppercase;
-        font-size: 20px;
-        font-weight: 900;
-        }*/
-
-        .dot {
-            font-size: 44px;
-            font-style: normal;
-            color: #343a40;
-        }
-
-        .small-box {
-            background-color: #343a40;
-            color: #c2c7d0;
-        }
+    {{-- <style>
 
         .brand-color {
             background-color: #343a40;
@@ -110,7 +88,7 @@
         .btn-outline-info:focus {
             box-shadow: 0 0 0 0 !important;
         }
-    </style>
+    </style> --}}
 </head>
 
 <body>
@@ -315,8 +293,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 </body>
 

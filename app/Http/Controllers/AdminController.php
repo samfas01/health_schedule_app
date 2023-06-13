@@ -118,6 +118,7 @@ class AdminController extends Controller
         //     'Content-Disposition' =>  'inline; filename="invoice.pdf"',
         // ]);
         return $pdf->stream('student-week-schedules.pdf');
+        return view('admin.schedules-print',  $data);
         return view('admin.schedules-print', compact('mondaySchedules', 'tuesdaySchedules', 'wednesdaySchedules', 'thursdaySchedules', 'fridaySchedules'));
     }
 
