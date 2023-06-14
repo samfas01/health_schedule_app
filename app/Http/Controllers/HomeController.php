@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -48,9 +49,7 @@ class HomeController extends Controller
         $request->validate([
             "department" => 'required',
             "image" => "required",
-
         ]);
-
 
         $user = Auth::user();
         $user->compelete_profile = 1;
@@ -65,11 +64,18 @@ class HomeController extends Controller
             $user->photo = $imageName;
 
 
-            $user->save();
-            return redirect('/home')->with('message', 'Profile Updated');
+            // $user->save();
+            // return redirect('/home')->with('message', 'Profile Updated');
         }
 
         $user->save();
+
+        if ($user->schedules->isEmpty()) {
+            $nextMinSchedule = Carbon::today()->addWeekday()->addHours(8);
+            $user->schedules()->create([
+                'schedule_time' => $nextMinSchedule,
+            ]);
+        }
         return redirect('/home')->with('message', 'Profile Updated');
     }
 

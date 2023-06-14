@@ -43,8 +43,16 @@
 
 
             </div>
-            <div class="row justify-content-around">
-                <a class="btn btn-primary col-sm-3 mt-1" href="{{ route('student.schedules') }}">My Schedules</a>
+            <div class="row justify-content-center">
+                @if (!$activeSchedule->isEmpty())
+                    <a href="{{ route('student.viewSchedule', $activeSchedule[0]->id) }}"
+                        class="btn btn-success btn-sm col-sm-3 m-1" type="button" style="color:white">
+                        <i class="fa fa-eye"></i>
+                        {{ __('View/Print Next
+                                                                    Schedule') }}
+                    </a>
+                @endif
+                <a class="btn btn-primary col-sm-3 m-1" href="{{ route('student.schedules') }}">My Schedules</a>
             </div>
         </div>
 
